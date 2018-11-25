@@ -4,10 +4,9 @@ from common import *
 from sklearn.model_selection import train_test_split
 from random import shuffle
 import pandas as pd
-import langdetect
 
 class DataProvider:
-    def __init__(self, config, part):
+    def __init__(self, config):
         self.log = logging.getLogger("DataProvider")
         self.log.info("data provider config: {0}".format(config))
         self.x_known_path = config["x_known"]
@@ -17,7 +16,7 @@ class DataProvider:
 
         x_known_file = open(self.x_known_path, 'r')
         self.x_known = x_known_file.readlines()
-        self.y_known = np.array(pd.read_csv(self.y_known_path)['Probability'].values)
+        self.y_known = np.array(pd.read_csv(self.y_known_path)['second'].values)
 
         known_using_count = int(len(self.x_known) * self.known_using_part)
         self.x_known = self.x_known[:known_using_count]

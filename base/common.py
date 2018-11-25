@@ -1,19 +1,33 @@
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
-
-import seaborn as sns
-sns.set(style="whitegrid")
-
-from sklearn import datasets
-from sklearn.model_selection import train_test_split, GridSearchCV
-from sklearn.pipeline import Pipeline
-from sklearn.linear_model import LinearRegression, Ridge, Lasso
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
-import pandas as pd
-
+import json
 import warnings
 warnings.filterwarnings("ignore")
+
+import logging
+import sys
+
+root = logging.getLogger()
+root.setLevel(logging.INFO)
+
+#logging.basicConfig(level=logging.DEBUG)
+#ch = logging.StreamHandler(sys.stdout)
+#ch.setLevel(logging.DEBUG)
+#formatter = logging.Formatter('%(asctime)s %(levelname)s[%(name)s] - %(message)s')
+#ch.setFormatter(formatter)
+#root.addHandler(ch)
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.svm import LinearSVC
+from sklearn.model_selection import GridSearchCV
+from sklearn.linear_model import LogisticRegression
+from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.metrics import roc_auc_score, accuracy_score
+import numpy as np
+import pandas as pd
+from sklearn.metrics import roc_auc_score
+
+from math import sqrt
+
+
 
 def draw_pair_plot(x_data, y_data):
     ncol, nrow = 7, x_data.shape[1] // 7 + (x_data.shape[1] % 7 > 0)
@@ -40,3 +54,5 @@ def mape_score(y_data, prediction):
     total = total * 100
     return total
 
+def ratio_score(y_expected, y_predicted):
+    return roc_auc_score(y_expected[:len(y_predicted)], y_predicted)

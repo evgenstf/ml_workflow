@@ -4,7 +4,7 @@ from common import *
 
 from dummy_x_transformer import *
 
-def x_transformer_by_config(config, need_stemmer):
+def x_transformer_by_config(config):
     x_transormer_config = config["x_transformer"]
     name = x_transormer_config["name"]
     if (name == "dummy"):

@@ -2,10 +2,10 @@ import sys
 sys.path.append("../../base")
 from common import *
 
-class DummyXTransformer:
+class DummyModel:
     def __init__(self, config):
-        self.log = logging.getLogger("DummyXTransformer")
-        self.log.info("x_transformer config:", config)
+        self.log = logging.getLogger("SkLearnCountVectorizerModel")
+        self.log.info("model config:", config)
         self.config = config
         self.log.info("inited")
 
@@ -15,8 +15,8 @@ class DummyXTransformer:
         self.y_train = y_train
         self.log.info("loaded")
 
-    def transform(self, x_data):
-        self.log.info("transform x_data size: {0}".format(len(x_data)))
-        result = x_data
-        self.log.info("transformed")
+    def predict(self, x_to_predict):
+        self.log.info("predict x_to_predict size: {0}".format(len(x_to_predict)))
+        result = [1]
+        self.log.info("predicted")
         return result
