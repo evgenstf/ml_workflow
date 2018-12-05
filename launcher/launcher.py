@@ -13,6 +13,12 @@ if (len(sys.argv) < 2):
     print("Usage: ./example.py <config>")
     exit()
 
+config_file = open(sys.argv[1], 'r')
+config = json.load(config_file)
+
+
+#----------launcher----------
+
 def make_prediction(config):
     data_provider = DataProvider(config["data_provider"])
     x_transformer = x_transformer_by_config(config)
@@ -26,8 +32,6 @@ def make_prediction(config):
 
 log = logging.getLogger("Launcher")
 
-config_file = open(sys.argv[1], 'r')
-config = json.load(config_file)
 log.info("launcher config: {0}".format(config))
 
 prediction = make_prediction(config)
