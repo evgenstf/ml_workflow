@@ -1,10 +1,8 @@
 rm script.py
 cat ../base/*.py >> script.py
 tail -n +10 ../data_provider/data_provider.py >> script.py
-tail -n +10 ../x_transformer/dummy_x_transformer.py >> script.py
-tail -n +10 ../x_transformer/x_transformer_by_config.py >> script.py
-tail -n +10 ../model/dummy_model.py >> script.py
-tail -n +10 ../model/model_by_config.py >> script.py
+for f in ../x_transformer/*.py; do tail -n +10 "$f" >> script.py; done
+for f in ../model/*.py; do tail -n +10 "$f" >> script.py; done
 
 echo "#----------config----------" >> script.py
 echo "config = json.loads(\"\"\"" >> script.py
